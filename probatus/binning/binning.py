@@ -23,6 +23,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.utils.validation import check_is_fitted
+from sklearn.tree import _tree
 
 from probatus.utils import assure_numpy_array, ApproximationWarning
 
