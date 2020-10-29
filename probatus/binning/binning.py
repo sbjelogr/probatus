@@ -23,7 +23,6 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.utils.validation import check_is_fitted
-from sklearn.tree import _tree
 
 from probatus.utils import assure_numpy_array, ApproximationWarning
 
@@ -51,7 +50,7 @@ class Bucketer(ABC):
 
     @property
     def counts(self):
-        warnings.warn("The 'counts' attribute is deprecated, use 'counts_' instead. The underscore suffix signals this is a fitted attribute.", 
+        warnings.warn("The 'counts' attribute is deprecated, use 'counts_' instead. The underscore suffix signals this is a fitted attribute.",
             DeprecationWarning)
         check_is_fitted(self)
         return self.counts_
@@ -68,7 +67,7 @@ class Bucketer(ABC):
 
         """
         check_is_fitted(self)
-        
+
         # np.digitize returns the indices of the bins to which each value in input array belongs
         # the smallest value of the `boundaries` attribute equals the lowest value in the set the instance was
         # fitted on, to prevent the smallest value of x_new to be in his own bucket, we ignore the first boundary
