@@ -5,6 +5,7 @@ import warnings
 from .warnings import  NotIntendedUseWarning
 
 
+
 class TreePathFinder():
     """Class to calculate the boundaries of a decision tree.
 
@@ -13,6 +14,7 @@ class TreePathFinder():
     """
 
     def __init__(self, estimator):
+        warnings.warn("Deprecated",DeprecationWarning)
         self.estimator = estimator
         self.n_nodes = estimator.tree_.node_count
         self.children_left = estimator.tree_.children_left
