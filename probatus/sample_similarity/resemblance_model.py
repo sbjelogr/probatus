@@ -22,7 +22,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from probatus.utils import assure_numpy_array, NotFittedError, get_scorers, warn_if_missing,\
-    assure_column_names_consistency
+    assure_column_names_consistency, assure_categorical_dtypes
 from probatus.utils.shap_helpers import shap_calc, calculate_shap_importance
 from sklearn.inspection import permutation_importance
 import matplotlib.pyplot as plt
@@ -111,6 +111,7 @@ class BaseResemblanceModel(object):
             self.X1,
             self.X2
         ]), columns = self.column_names).reset_index(drop=True)
+        self.X = assure_categorical_dtypes(self.X)
 
         self.y = pd.Series(np.concatenate([
             np.zeros(self.X1.shape[0]),

@@ -109,6 +109,24 @@ def assure_pandas_df(x):
             "Please supply a list, numpy array, pandas Series or pandas DataFrame"
         )
 
+
+def assure_categorical_dtypes(X):
+    """
+    This function ensures that any feature with dtype = 'object' in the dataframe is transformed to 'category'.
+    This way, the LightGBM classifier can handle these features as categorical.
+
+    Args:
+        X (pd.DataFrame): Dataframe to be transformed.
+
+    Returns:
+        (pd.DataFrame): Transformed dataframe
+    """
+    if isinstance(X, pd.DataFrame):
+        for column in X.columns:
+            if X[column].dtype.name == 'object':
+                X[column] = X[column].astype('category')
+    return X
+
 def assure_column_names_consistency(column_names, df):
     """
     Ensure that the column names are correct. If they are None, then, the column names from df are taken. Otherwise,
@@ -157,7 +175,7 @@ def warn_if_missing(variable, variable_name):
         if variable.isnull().values.any():
             warnings.warn(warning_text)
     if isinstance(variable, np.ndarray):
-        if np.isnan(variable).any():
+        if pd.isnull(variable).any():
             warnings.warn(warning_text)
 
 
