@@ -1,0 +1,1160 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Python package for validation of binary classifiers" name="description"/>
+<link href="https://probatus.readthedocs.io/api/feature_elimination.html" rel="canonical"/>
+<meta content="ING Bank N. V." name="author"/>
+<link href="../img/Probatus_P_white.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-6.1.4" name="generator"/>
+<title>probatus.feature_elimination - Probatus Docs</title>
+<link href="../assets/stylesheets/main.358818c7.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.f0267088.min.css" rel="stylesheet"/>
+<meta content="#ff6e42" name="theme-color"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Ubuntu",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+<link href="../css/ansi-colours.css" rel="stylesheet"/>
+<link href="../css/jupyter-cells.css" rel="stylesheet"/>
+<link href="../css/pandas-dataframe.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="deep-orange" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#features-elimination">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header-nav md-grid">
+<a aria-label="Probatus Docs" class="md-header-nav__button md-logo" href="https://probatus.readthedocs.io/" title="Probatus Docs">
+<img alt="logo" src="../img/Probatus_P_white.png"/>
+</a>
+<label class="md-header-nav__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header-nav__title" data-md-component="header-title">
+<div class="md-header-nav__ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
+            Probatus Docs
+          </span>
+<span class="md-header-nav__topic md-ellipsis">
+            
+              probatus.feature_elimination
+            
+          </span>
+</div>
+</div>
+<label class="md-header-nav__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header-nav__source">
+<a class="md-source" href="https://gitlab.com/ing_rpaa/probatus/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs md-tabs--active" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../index.html">
+          Home
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../tutorials/nb_shap_model_interpreter.html">
+          Tutorials
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="feature_elimination.html">
+          API
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Probatus Docs" class="md-nav__button md-logo" href="https://probatus.readthedocs.io/" title="Probatus Docs">
+<img alt="logo" src="../img/Probatus_P_white.png"/>
+</a>
+    Probatus Docs
+  </label>
+<div class="md-nav__source">
+<a class="md-source" href="https://gitlab.com/ing_rpaa/probatus/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Home" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+<span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+      Index
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Tutorials" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+<span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/nb_shap_model_interpreter.html">
+      Tree-based Model Interpretation with SHAP
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/nb_shap_feature_elimination.html">
+      Recursive Feature Elimination using SHAP importance and CV
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/nb_metric_volatility.html">
+      Model Metrics Volatility
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/nb_sample_similarity.html">
+      Multivariate Sample Similarity
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/nb_distribution_statistics.html">
+      Univariate Sample Similarity
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      API
+      <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="API" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+<span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        probatus.feature_elimination
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="feature_elimination.html">
+      probatus.feature_elimination
+    </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination">
+    probatus.feature_elimination
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination">
+    feature_elimination
+  </a>
+<nav aria-label="feature_elimination" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV">
+    ShapRFECV
+  </a>
+<nav aria-label="ShapRFECV" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.__init__">
+    __init__()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.compute">
+    compute()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit">
+    fit()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit_compute">
+    fit_compute()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.get_reduced_features_set">
+    get_reduced_features_set()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.plot">
+    plot()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="model_interpret.html">
+      probatus.interpret
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metric_volatility.html">
+      probatus.metric_volatility
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sample_similarity.html">
+      probatus.sample_similarity
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="stat_tests.html">
+      probatus.stat_tests
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination">
+    probatus.feature_elimination
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination">
+    feature_elimination
+  </a>
+<nav aria-label="feature_elimination" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV">
+    ShapRFECV
+  </a>
+<nav aria-label="ShapRFECV" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.__init__">
+    __init__()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.compute">
+    compute()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit">
+    fit()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit_compute">
+    fit_compute()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.get_reduced_features_set">
+    get_reduced_features_set()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.plot">
+    plot()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://gitlab.com/ing_rpaa/probatus/edit/master/docs/api/feature_elimination.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="features-elimination">Features Elimination<a class="headerlink" href="#features-elimination" title="Permanent link">¶</a></h1>
+<p>This module allows to apply features elimination.</p>
+<div class="doc doc-object doc-module">
+<h2 class="hidden-toc" href="#probatus.feature_elimination" id="probatus.feature_elimination" style="visibility: hidden; position: absolute;">
+<a class="headerlink" href="#probatus.feature_elimination" title="Permanent link">¶</a></h2>
+<div class="doc doc-contents first">
+<div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination">
+<code>feature_elimination</code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination" title="Permanent link">¶</a></h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV">
+<code>ShapRFECV</code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV" title="Permanent link">¶</a></h3>
+<div class="doc doc-contents">
+<p>This class performs Backwards Recursive Feature Elimination, using SHAP features importance. At each round, for a given
+ features set, starting from all available features, a model is optimized (e.g. using RandomSearchCV) and trained.
+ At the end of each round, the n lowest SHAP feature importance features are removed and the model results are
+ stored. The user can plot the performance of the model for each round, and select the optimal number of features
+ and the features set.</p>
+<p>The functionality is similar to <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFECV.html">sklearn.feature_selection.RFECV</a>,
+ yet, it removes the lowest importance features based on SHAP features importance and optimizes the hyperparameters
+ of the model at each round.</p>
+<p>We recommend using LightGBM model, because by default it handles missing values and categorical features. In case
+ of other models, make sure to handle these issues for your dataset and consider impact it might have on features
+ importance.</p>
+<p><strong>Examples:</strong></p>
+<br/>
+<div class="codehilite">
+<pre><span></span><code><span class="kn">from</span> <span class="nn">probatus.feature_elimination</span> <span class="kn">import</span> <span class="n">ShapRFECV</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">lightgbm</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'f1_categorical'</span><span class="p">,</span> <span class="s1">'f2_missing'</span><span class="p">,</span> <span class="s1">'f3_static'</span><span class="p">,</span> <span class="s1">'f4'</span><span class="p">,</span> <span class="s1">'f5'</span><span class="p">,</span> <span class="s1">'f6'</span><span class="p">,</span> <span class="s1">'f7'</span><span class="p">,</span> <span class="s1">'f8'</span><span class="p">,</span> <span class="s1">'f9'</span><span class="p">,</span> <span class="s1">'f10'</span><span class="p">,</span> <span class="s1">'f11'</span><span class="p">,</span> <span class="s1">'f12'</span><span class="p">,</span> <span class="s1">'f13'</span><span class="p">,</span> <span class="s1">'f14'</span><span class="p">,</span> <span class="s1">'f15'</span><span class="p">]</span>
+
+<span class="c1"># Prepare two samples</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">X</span><span class="p">[</span><span class="s1">'f1_categorical'</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s1">'f1_categorical'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="p">)))</span>
+<span class="n">X</span><span class="p">[</span><span class="s1">'f2_missing'</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s1">'f2_missing'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span><span class="o">&lt;</span><span class="mf">0.8</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">X</span><span class="p">[</span><span class="s1">'f3_static'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Prepare model and parameter search space</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">lightgbm</span><span class="o">.</span><span class="n">LGBMClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">'balanced'</span><span class="p">)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'n_estimators'</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">'num_leaves'</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+<span class="p">}</span>
+
+    <span class="c1"># Run feature elimination</span>
+<span class="n">shap_elimination</span> <span class="o">=</span> <span class="n">ShapRFECV</span><span class="p">(</span>
+    <span class="n">clf</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span> <span class="n">search_space</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">search_schema</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">'roc_auc'</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">shap_elimination</span><span class="o">.</span><span class="n">fit_compute</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Make plots</span>
+<span class="n">shap_elimination</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'performance'</span><span class="p">)</span>
+<span class="n">shap_elimination</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'parameter'</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="p">[</span><span class="s1">'n_estimators'</span><span class="p">,</span> <span class="s1">'num_leaves'</span><span class="p">])</span>
+
+<span class="c1"># Get final features set</span>
+<span class="n">final_features_set</span> <span class="o">=</span> <span class="n">shap_elimination</span><span class="o">.</span><span class="n">get_reduced_features_set</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+</div>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.__init__">
+<code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">search_space</span><span class="p">,</span> <span class="n">search_schema</span><span class="o">=</span><span class="s1">'random'</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_features_to_select</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">search_kwargs</span><span class="p">)</span> </code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-special"><code>special</code></small>
+</span>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.__init__" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>This method initializes the class:</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clf</code></td>
+<td><code>binary classifier</code></td>
+<td>
+<p>A model that will be optimized and trained at each round of features
+elimination. The recommended model is LightGBM, because it by default handles the missing values and
+categorical variables.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>search_space</code></td>
+<td><code>dict of sklearn.ParamGrid</code></td>
+<td>
+<p>Parameter search space, which will be explored during the
+hyperparameter search. In case <code>grid</code> search_schema, it is passed to GridSearchCV as <code>param_grid</code>, in case
+of <code>random</code> search_schema, then this value is passed to RandomSearchCV as <code>param_distributions</code> parameter.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>search_schema</code></td>
+<td><code>Optional, str</code></td>
+<td>
+<p>The hyperparameter search algorithm that should be used to optimize the model.
+It can be one of the following:</p>
+<ul>
+<li><code>random</code>: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html">RandomSearchCV</a>
+  which randomly selects hyperparameters from the prowided param_grid, and performs optimization using
+  Cross-Validation. It is recommended option, when you optimize a large number of hyperparameters.</li>
+<li><code>grid</code>: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">GridSearchCV</a>
+  which searches through all permutations of hyperparameters values from param_grid, and performs
+  optimization using Cross-Validation. It is recommended option, for low number of hyperparameters.</li>
+</ul>
+</td>
+<td><code>'random'</code></td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td><code>Optional, int or float</code></td>
+<td>
+<p>Number of lowest importance features removed each round. If it
+is an int, then each round such number of features is discarded. If float, such percentage of remaining
+features (rounded down) is removed each iteration. It is recommended to use float, since it is faster for a
+large number of features, and slows down and becomes more precise towards less features. Note: the last
+round may remove fewer features in order to reach min_features_to_select.</p>
+</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>min_features_to_select</code></td>
+<td><code>Optional, unt</code></td>
+<td>
+<p>Minimum number of features to be kept. This is a stopping criterion
+of the feature elimination. By default the process stops when one feature is left.</p>
+</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>random_state</code></td>
+<td><code>Optional, int</code></td>
+<td>
+<p>Random state set at each round of feature elimination. If it is None, the
+results will not be reproducible and in random search at each iteration a different hyperparameters might
+be tested. For reproducible results set it to integer.</p>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>**search_kwargs</code></td>
+<td><code></code></td>
+<td>
+<p>The keywords arguments passed to a given search schema, during initialization. Please refer
+to the parameters of a given search schema.</p>
+</td>
+<td><code>{}</code></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">search_space</span><span class="p">,</span> <span class="n">search_schema</span><span class="o">=</span><span class="s1">'random'</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_features_to_select</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+             <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">search_kwargs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    This method initializes the class:</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        clf (binary classifier): A model that will be optimized and trained at each round of features</span>
+<span class="sd">         elimination. The recommended model is LightGBM, because it by default handles the missing values and</span>
+<span class="sd">         categorical variables.</span>
+
+<span class="sd">        search_space (dict of sklearn.ParamGrid): Parameter search space, which will be explored during the</span>
+<span class="sd">         hyperparameter search. In case `grid` search_schema, it is passed to GridSearchCV as `param_grid`, in case</span>
+<span class="sd">         of `random` search_schema, then this value is passed to RandomSearchCV as `param_distributions` parameter.</span>
+
+<span class="sd">        search_schema (Optional, str): The hyperparameter search algorithm that should be used to optimize the model.</span>
+<span class="sd">          It can be one of the following:</span>
+
+<span class="sd">            - `random`: [RandomSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)</span>
+<span class="sd">              which randomly selects hyperparameters from the prowided param_grid, and performs optimization using</span>
+<span class="sd">              Cross-Validation. It is recommended option, when you optimize a large number of hyperparameters.</span>
+<span class="sd">            - `grid`: [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)</span>
+<span class="sd">              which searches through all permutations of hyperparameters values from param_grid, and performs</span>
+<span class="sd">              optimization using Cross-Validation. It is recommended option, for low number of hyperparameters.</span>
+
+<span class="sd">        step (Optional, int or float): Number of lowest importance features removed each round. If it</span>
+<span class="sd">         is an int, then each round such number of features is discarded. If float, such percentage of remaining</span>
+<span class="sd">         features (rounded down) is removed each iteration. It is recommended to use float, since it is faster for a</span>
+<span class="sd">         large number of features, and slows down and becomes more precise towards less features. Note: the last</span>
+<span class="sd">         round may remove fewer features in order to reach min_features_to_select.</span>
+
+<span class="sd">        min_features_to_select (Optional, unt): Minimum number of features to be kept. This is a stopping criterion</span>
+<span class="sd">         of the feature elimination. By default the process stops when one feature is left.</span>
+
+<span class="sd">        random_state (Optional, int): Random state set at each round of feature elimination. If it is None, the</span>
+<span class="sd">         results will not be reproducible and in random search at each iteration a different hyperparameters might</span>
+<span class="sd">         be tested. For reproducible results set it to integer.</span>
+
+<span class="sd">        **search_kwargs: The keywords arguments passed to a given search schema, during initialization. Please refer</span>
+<span class="sd">         to the parameters of a given search schema.</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span>
+
+    <span class="k">if</span> <span class="n">search_schema</span> <span class="o">==</span> <span class="s1">'random'</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_class</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span>
+    <span class="k">elif</span> <span class="n">search_schema</span> <span class="o">==</span> <span class="s1">'grid'</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_class</span> <span class="o">=</span> <span class="n">GridSearchCV</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Unsupported search_schema, choose one of the following: "random", "grid".'</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="n">search_space</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">search_kwargs</span> <span class="o">=</span> <span class="n">search_kwargs</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> \
+            <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The current value of step = </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> is not allowed. "</span>
+                          <span class="sa">f</span><span class="s2">"It needs to be a positive integer or positive float."</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_features_to_select</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">min_features_to_select</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_features_to_select</span><span class="o">=</span><span class="n">min_features_to_select</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The current value of min_features_to_select = </span><span class="si">{</span><span class="n">min_features_to_select</span><span class="si">}</span><span class="s2"> is not allowed. "</span>
+                          <span class="sa">f</span><span class="s2">"It needs to be a positive integer."</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.compute">
+<code class="highlight language-python">
+compute<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.compute" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>Checks if fit() method has been run and computes the DataFrame with results of feature elimintation for each
+ round.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(pd.DataFrame)</code></td>
+<td>
+<p>DataFrame with results of feature elimination for each round.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Checks if fit() method has been run and computes the DataFrame with results of feature elimintation for each</span>
+<span class="sd">     round.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (pd.DataFrame): DataFrame with results of feature elimination for each round.</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_fitted</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.fit">
+<code class="highlight language-python">
+fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> </code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>Fits the object with the provided data. The algorithm starts with the entire dataset, and then sequentially
+ eliminates features. At each step, it optimizes hyperparameters of the model, computes SHAP features importance
+ and removes the lowest importance features.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X</code></td>
+<td><code>pd.DataFrame</code></td>
+<td>
+<p>Provided dataset.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td><code>pd.Series</code></td>
+<td>
+<p>Binary labels for X.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Fits the object with the provided data. The algorithm starts with the entire dataset, and then sequentially</span>
+<span class="sd">     eliminates features. At each step, it optimizes hyperparameters of the model, computes SHAP features importance</span>
+<span class="sd">     and removes the lowest importance features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Provided dataset.</span>
+<span class="sd">        y (pd.Series): Binary labels for X.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Set seed for results reproducibility</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess_data</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="n">remaining_features</span> <span class="o">=</span> <span class="n">current_features_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">round_number</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_features_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_features_to_select</span><span class="p">:</span>
+        <span class="n">round_number</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Get current dataset info</span>
+        <span class="n">current_features_set</span> <span class="o">=</span> <span class="n">remaining_features</span>
+        <span class="n">current_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">current_features_set</span><span class="p">]</span>
+
+        <span class="c1"># Optimize parameters</span>
+        <span class="c1"># Set seed for results reproducibility</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="n">search</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">search_kwargs</span><span class="p">)</span>
+        <span class="n">search</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">current_X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Compute SHAP values</span>
+        <span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_calc</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="n">current_X</span><span class="p">,</span> <span class="n">suppress_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">shap_importance_df</span> <span class="o">=</span> <span class="n">calculate_shap_importance</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="n">remaining_features</span><span class="p">)</span>
+
+        <span class="c1"># Get features to remove</span>
+        <span class="n">features_to_remove</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_features_to_remove</span><span class="p">(</span><span class="n">shap_importance_df</span><span class="p">)</span>
+        <span class="n">remaining_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">current_features_set</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">features_to_remove</span><span class="p">))</span>
+
+        <span class="c1"># Report results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_report_current_results</span><span class="p">(</span><span class="n">round_number</span><span class="o">=</span><span class="n">round_number</span><span class="p">,</span> <span class="n">current_features_set</span><span class="o">=</span><span class="n">current_features_set</span><span class="p">,</span>
+                                     <span class="n">features_to_remove</span><span class="o">=</span><span class="n">features_to_remove</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="n">search</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Round: </span><span class="si">{</span><span class="n">round_number</span><span class="si">}</span><span class="s1">, Current number of features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">current_features_set</span><span class="p">)</span><span class="si">}</span><span class="s1">, '</span>
+              <span class="sa">f</span><span class="s1">'Current performance: Train </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">round_number</span><span class="p">][</span><span class="s2">"train_metric_mean"</span><span class="p">]</span><span class="si">}</span><span class="s1"> '</span>
+              <span class="sa">f</span><span class="s1">'+/- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">round_number</span><span class="p">][</span><span class="s2">"train_metric_std"</span><span class="p">]</span><span class="si">}</span><span class="s1">, CV Validation '</span>
+              <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">round_number</span><span class="p">][</span><span class="s2">"val_metric_mean"</span><span class="p">]</span><span class="si">}</span><span class="s1"> '</span>
+              <span class="sa">f</span><span class="s1">'+/- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">round_number</span><span class="p">][</span><span class="s2">"val_metric_std"</span><span class="p">]</span><span class="si">}</span><span class="s1">. </span><span class="se">\n</span><span class="s1">'</span>
+              <span class="sa">f</span><span class="s1">'Num of features left: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">remaining_features</span><span class="p">)</span><span class="si">}</span><span class="s1">. '</span>
+              <span class="sa">f</span><span class="s1">'Removed features at the end of the round: </span><span class="si">{</span><span class="n">features_to_remove</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.fit_compute">
+<code class="highlight language-python">
+fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> </code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.fit_compute" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>Fits the object and computes the report. The algorithm starts with the entire dataset, and then sequentially
+ eliminates features. At each step, it optimizes hyperparameters of the model, computes SHAP features importance
+ and removes the lowest importance features. At the end, the report containing results from each iteration is
+ computed and returned to the user.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X</code></td>
+<td><code>pd.DataFrame</code></td>
+<td>
+<p>Provided dataset.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td><code>pd.Series</code></td>
+<td>
+<p>Binary labels for X.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(pd.DataFrame)</code></td>
+<td>
+<p>DataFrame containing results of feature elimination from each iteration.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">fit_compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Fits the object and computes the report. The algorithm starts with the entire dataset, and then sequentially</span>
+<span class="sd">     eliminates features. At each step, it optimizes hyperparameters of the model, computes SHAP features importance</span>
+<span class="sd">     and removes the lowest importance features. At the end, the report containing results from each iteration is</span>
+<span class="sd">     computed and returned to the user.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Provided dataset.</span>
+<span class="sd">        y (pd.Series): Binary labels for X.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (pd.DataFrame): DataFrame containing results of feature elimination from each iteration.</span>
+<span class="sd">    """</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.get_reduced_features_set">
+<code class="highlight language-python">
+get_reduced_features_set<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)</span> </code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.get_reduced_features_set" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>Gets the features set after the feature elimination process, for a given number of features.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>num_features</code></td>
+<td><code>int</code></td>
+<td>
+<p>Number of features in the reduced features set.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(list of str)</code></td>
+<td>
+<p>Reduced features set.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_reduced_features_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Gets the features set after the feature elimination process, for a given number of features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_features (int): Number of features in the reduced features set.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list of str): Reduced features set.</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_fitted</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">num_features</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">num_features</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The provided number of features has not been achieved at any stage of the process. '</span>
+                         <span class="sa">f</span><span class="s1">'You can select one of the following: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">num_features</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">num_features</span> <span class="o">==</span> <span class="n">num_features</span><span class="p">][</span><span class="s1">'features_set'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="probatus.feature_elimination.feature_elimination.ShapRFECV.plot">
+<code class="highlight language-python">
+plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">'performance'</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">figure_kwargs</span><span class="p">)</span> </code>
+<a class="headerlink" href="#probatus.feature_elimination.feature_elimination.ShapRFECV.plot" title="Permanent link">¶</a></h4>
+<div class="doc doc-contents">
+<p>Generates plots that allow to analyse the results.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plot_type</code></td>
+<td><code>Optional, str</code></td>
+<td>
+<p>String indicating the plot type:</p>
+<ul>
+<li><code>performance</code>: Performance of the optimized model at each iteration. This plot allows to select the
+ optimal features set.</li>
+<li><code>parameter</code>: Plots the optimized hyperparameter's values at each iteration. This plot allows to
+ analyse stability of parameters for different features set. In case large variability of optimal
+ hyperparameters values is seen, consider reducing the search space.</li>
+</ul>
+</td>
+<td><code>'performance'</code></td>
+</tr>
+<tr>
+<td><code>param_names</code></td>
+<td><code>Optional, str, list of str</code></td>
+<td>
+<p>Name or names of parameters that will be plotted in case of</p>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>show</code></td>
+<td><code>Optional, bool</code></td>
+<td>
+<p>If True, the plots are showed to the user, otherwise they are not shown.</p>
+</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>**figure_kwargs</code></td>
+<td><code></code></td>
+<td>
+<p>Keyword arguments that are passed to the plt.figure, at its initialization.</p>
+</td>
+<td><code>{}</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code></code></td>
+<td>
+<p>(plt.axis or list of plt.axis) Axis containing the target plot, or list of such axes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>probatus/feature_elimination/feature_elimination.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">'performance'</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">figure_kwargs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Generates plots that allow to analyse the results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        plot_type (Optional, str): String indicating the plot type:</span>
+
+<span class="sd">            - `performance`: Performance of the optimized model at each iteration. This plot allows to select the</span>
+<span class="sd">             optimal features set.</span>
+<span class="sd">            - `parameter`: Plots the optimized hyperparameter's values at each iteration. This plot allows to</span>
+<span class="sd">             analyse stability of parameters for different features set. In case large variability of optimal</span>
+<span class="sd">             hyperparameters values is seen, consider reducing the search space.</span>
+
+<span class="sd">        param_names (Optional, str, list of str): Name or names of parameters that will be plotted in case of</span>
+<span class="sd">        `plot_type="parameter"`</span>
+
+<span class="sd">        show (Optional, bool): If True, the plots are showed to the user, otherwise they are not shown.</span>
+
+<span class="sd">        **figure_kwargs: Keyword arguments that are passed to the plt.figure, at its initialization.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (plt.axis or list of plt.axis) Axis containing the target plot, or list of such axes.</span>
+<span class="sd">    """</span>
+    <span class="n">x_ticks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'num_features'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">'performance'</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="o">**</span><span class="n">figure_kwargs</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'num_features'</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'train_metric_mean'</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Train Score'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">),</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'train_metric_mean'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'train_metric_std'</span><span class="p">],</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'train_metric_mean'</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'train_metric_std'</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'num_features'</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'val_metric_mean'</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Validation Score'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">),</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'val_metric_mean'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'val_metric_std'</span><span class="p">],</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'val_metric_mean'</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'val_metric_std'</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Number of features'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Performance'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Backwards Feature Elimination using SHAP &amp; CV'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"lower left"</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">'parameter'</span><span class="p">:</span>
+        <span class="n">param_names</span> <span class="o">=</span> <span class="n">assure_list_of_strings</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="s1">'target_columns'</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="n">param_names</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="o">**</span><span class="n">figure_kwargs</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="s1">'num_features'</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">'param_</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s1">'</span><span class="p">],</span>
+                     <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s1"> optimized value'</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Number of features'</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Optimizal </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s1"> value'</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Optimization of </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s1"> for different numbers of features'</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"lower left"</span><span class="p">)</span>
+            <span class="n">current_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+            <span class="n">current_ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+            <span class="n">current_ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_ax</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Wrong value of plot_type. Select from "performance" or "parameter"'</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
+<a class="md-footer-nav__link md-footer-nav__link--prev" href="../tutorials/nb_distribution_statistics.html" rel="prev">
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Univariate Sample Similarity
+              </div>
+</div>
+</a>
+<a class="md-footer-nav__link md-footer-nav__link--next" href="model_interpret.html" rel="next">
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Next
+                </span>
+                probatus.interpret
+              </div>
+</div>
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2020 ING Bank N.V.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/vendor.7e0ee788.min.js"></script>
+<script src="../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+<script>
+        app = initialize({
+          base: "..",
+          features: ['navigation.tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+</body>
+</html>
