@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://probatus.readthedocs.io/index.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/tutorials/nb_shap_model_interpreter.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/tutorials/nb_shap_feature_elimination.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/tutorials/nb_metric_volatility.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/tutorials/nb_sample_similarity.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/tutorials/nb_distribution_statistics.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/api/feature_elimination.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/api/model_interpret.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/api/metric_volatility.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/api/sample_similarity.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://probatus.readthedocs.io/api/stat_tests.html</loc>
-     <lastmod>2020-11-11</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
