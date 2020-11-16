@@ -850,7 +850,8 @@ compute<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>list of columns in df1 and df2 that should be compared. If None, </p>
+<p>list of columns in df1 and df2 that should be compared. If None, 
+all column names will be compared</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -910,7 +911,7 @@ compute<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <span class="sd">        df2 (pd.DataFrame): dataframe 2 for distribution comparison with dataframe 1.</span>
 
 <span class="sd">        column_names (list of str): list of columns in df1 and df2 that should be compared. If None, </span>
-<span class="sd">        all column names will be compared</span>
+<span class="sd">         all column names will be compared</span>
 
 <span class="sd">        return_failed_tests (bool): remove tests in result that did not succeed.</span>
 
@@ -1100,6 +1101,15 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td><code>'default'</code></td>
 </tr>
+<tr>
+<td><code>bin_count</code></td>
+<td><code>Optional, int</code></td>
+<td>
+<p>In case binning_strategy is not None, specify the number of bins to be used by the binning
+strategy. By default 10 bins are used.</p>
+</td>
+<td><code>10</code></td>
+</tr>
 </tbody>
 </table>
 <details class="quote">
@@ -1127,7 +1137,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">             is used. For PSI by default quantilebucketer is used.</span>
 <span class="sd">            - None: no binning is applied. The test is computed based on original distribution.</span>
 
-<span class="sd">        bin_count (Optional, int) In case binning_strategy is not None, specify the number of bins to be used by the binning</span>
+<span class="sd">        bin_count (Optional, int): In case binning_strategy is not None, specify the number of bins to be used by the binning</span>
 <span class="sd">         strategy. By default 10 bins are used.</span>
 <span class="sd">    """</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">statistical_test</span> <span class="o">=</span> <span class="n">statistical_test</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>

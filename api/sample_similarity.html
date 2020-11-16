@@ -545,9 +545,9 @@ By looking at the test AUC, one can conclude that the samples have different dis
 <a class="headerlink" href="#probatus.sample_similarity.resemblance_model.BaseResemblanceModel" title="Permanent link">¶</a></h2>
 <div class="doc doc-contents">
 <p>This model checks for similarity of two samples. A possible use case is analysis whether train sample differs
-from test sample, due to e.g. non-stationarity.</p>
+ from test sample, due to e.g. non-stationarity.</p>
 <p>This is a base class and needs to be extended by a fit() method, which implements how data is split, how model is
-trained and evaluated. Further, inheriting classes need to implement how feature importance should be indicated.</p>
+ trained and evaluated. Further, inheriting classes need to implement how feature importance should be indicated.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="probatus.sample_similarity.resemblance_model.BaseResemblanceModel.__init__">
@@ -656,7 +656,8 @@ compute<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -689,7 +690,7 @@ tuple (feature importances, train AUC, test AUC), or feature importances.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple(pd.DataFrame, float, float) or pd.DataFrame: Depending on value of return_tuple either returns a</span>
@@ -728,7 +729,8 @@ fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -736,7 +738,8 @@ fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -744,7 +747,9 @@ fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -759,14 +764,14 @@ fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 <span class="sd">    """</span>
 
     <span class="c1"># Set seed for results reproducibility</span>
@@ -847,7 +852,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -855,7 +861,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -863,7 +870,9 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -871,7 +880,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -919,17 +929,17 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
 
 <span class="sd">        **fit_kwargs: keyword arguments passed to the fit() method:</span>
 
@@ -1000,14 +1010,14 @@ get_data_splits<span class="p">(</span><span class="bp">self</span><span class="
 <a class="headerlink" href="#probatus.sample_similarity.resemblance_model.PermutationImportanceResemblance" title="Permanent link">¶</a></h2>
 <div class="doc doc-contents">
 <p>This model checks for similarity of two samples. A possible use case is analysis whether train sample differs
-from test sample, due to e.g. non-stationarity.</p>
+ from test sample, due to e.g. non-stationarity.</p>
 <p>It assigns to labels to each sample, 0 to first sample, 1 to the second. Then, It randomly selects a portion of
-data to train on. The resulting model tries to distinguish which sample does a given test row comes from. This
-provides insights on how distinguishable these samples are and which features contribute to that. The feature
-importance is calculated using permutation importance.</p>
+ data to train on. The resulting model tries to distinguish which sample does a given test row comes from. This
+ provides insights on how distinguishable these samples are and which features contribute to that. The feature
+ importance is calculated using permutation importance.</p>
 <p>If the model achieves test AUC significantly different than 0.5, it indicates that it is possible to distinguish
-the samples, and therefore, the samples differ. Features with high permutation importance contribute to that
-effect the most. Thus, their distribution might differ between two samples.</p>
+ the samples, and therefore, the samples differ. Features with high permutation importance contribute to that
+ effect the most. Thus, their distribution might differ between two samples.</p>
 <p><strong>Examples:</strong></p>
 <br/>
 <div class="codehilite">
@@ -1056,7 +1066,8 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td><code>iterations</code></td>
 <td><code>int</code></td>
 <td>
-<p>Number of iterations performed to calculate permutation importance. By default 100</p>
+<p>Number of iterations performed to calculate permutation importance. By default 100
+iterations per feature are done.</p>
 </td>
 <td><code>100</code></td>
 </tr>
@@ -1086,7 +1097,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">        model (model object): Binary classification model or pipeline.</span>
 
 <span class="sd">        iterations (int, optional): Number of iterations performed to calculate permutation importance. By default 100</span>
-<span class="sd">        iterations per feature are done.</span>
+<span class="sd">         iterations per feature are done.</span>
 
 <span class="sd">        **kwargs: Keyword arguments that can overwrite inherited default values in BaseResemblanceModel:</span>
 
@@ -1134,7 +1145,8 @@ compute<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -1167,7 +1179,7 @@ tuple (feature importances, train AUC, test AUC), or feature importances.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple(pd.DataFrame, float, float) or pd.DataFrame: Depending on value of return_tuple either returns a</span>
@@ -1209,7 +1221,8 @@ feature importance is calculated using permutation importance.</p>
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1217,7 +1230,8 @@ feature importance is calculated using permutation importance.</p>
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1225,7 +1239,9 @@ feature importance is calculated using permutation importance.</p>
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1243,14 +1259,14 @@ feature importance is calculated using permutation importance.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 <span class="sd">    """</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X1</span><span class="o">=</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="o">=</span><span class="n">X2</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span>
 
@@ -1313,7 +1329,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1321,7 +1338,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1329,7 +1347,9 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1337,7 +1357,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -1385,17 +1406,17 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
 
 <span class="sd">        **fit_kwargs: keyword arguments passed to the fit() method:</span>
 
@@ -1482,7 +1503,8 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <td><code>ax</code></td>
 <td><code>matplotlib.axes</code></td>
 <td>
-<p>Axes to which the output should be plotted. If not provided a new axes are</p>
+<p>Axes to which the output should be plotted. If not provided a new axes are
+created.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1490,7 +1512,8 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <td><code>top_n</code></td>
 <td><code>int</code></td>
 <td>
-<p>Number of the most important features to be plotted. By default are features are</p>
+<p>Number of the most important features to be plotted. By default are features are
+included into the plot.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1522,10 +1545,10 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ax (matplotlib.axes, optional): Axes to which the output should be plotted. If not provided a new axes are</span>
-<span class="sd">        created.</span>
+<span class="sd">         created.</span>
 
 <span class="sd">        top_n (int, optional): Number of the most important features to be plotted. By default are features are</span>
-<span class="sd">        included into the plot.</span>
+<span class="sd">         included into the plot.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        matplotlib.axes, optional: Axes that include the plot.</span>
@@ -1576,14 +1599,14 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <a class="headerlink" href="#probatus.sample_similarity.resemblance_model.SHAPImportanceResemblance" title="Permanent link">¶</a></h2>
 <div class="doc doc-contents">
 <p>This model checks for similarity of two samples. A possible use case is analysis whether train sample differs
-from test sample, due to e.g. non-stationarity.</p>
+ from test sample, due to e.g. non-stationarity.</p>
 <p>It assigns to labels to each sample, 0 to first sample, 1 to the second. Then, It randomly selects a portion of
-data to train on. The resulting model tries to distinguish which sample does a given test row comes from. This
-provides insights on how distinguishable these samples are and which features contribute to that. The feature
-importance is calculated using SHAP feature importance.</p>
+ data to train on. The resulting model tries to distinguish which sample does a given test row comes from. This
+ provides insights on how distinguishable these samples are and which features contribute to that. The feature
+ importance is calculated using SHAP feature importance.</p>
 <p>If the model achieves test AUC significantly different than 0.5, it indicates that it is possible to distinguish
-the samples, and therefore, the samples differ. Features with high permutation importance contribute to that
-effect the most. Thus, their distribution might differ between two samples.</p>
+ the samples, and therefore, the samples differ. Features with high permutation importance contribute to that
+ effect the most. Thus, their distribution might differ between two samples.</p>
 <p>This class currently works only with the Tree based models.</p>
 <p><strong>Examples:</strong></p>
 <br/>
@@ -1693,7 +1716,8 @@ compute<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -1726,7 +1750,7 @@ tuple (feature importances, train AUC, test AUC), or feature importances.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or feature importances. By default the second option is selected.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple(pd.DataFrame, float, float) or pd.DataFrame: Depending on value of return_tuple either returns a</span>
@@ -1750,9 +1774,9 @@ fit<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <a class="headerlink" href="#probatus.sample_similarity.resemblance_model.SHAPImportanceResemblance.fit" title="Permanent link">¶</a></h3>
 <div class="doc doc-contents">
 <p>This function assigns to labels to each sample, 0 to first sample, 1 to the second. Then, It randomly selects a
-portion of data to train on. The resulting model tries to distinguish which sample does a given test row comes
-from. This provides insights on how distinguishable these samples are and which features contribute to that. The
-feature importance is calculated using SHAP feature importance.</p>
+ portion of data to train on. The resulting model tries to distinguish which sample does a given test row comes
+ from. This provides insights on how distinguishable these samples are and which features contribute to that. The
+ feature importance is calculated using SHAP feature importance.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1768,7 +1792,8 @@ feature importance is calculated using SHAP feature importance.</p>
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1776,7 +1801,8 @@ feature importance is calculated using SHAP feature importance.</p>
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1784,7 +1810,9 @@ feature importance is calculated using SHAP feature importance.</p>
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1796,20 +1824,20 @@ feature importance is calculated using SHAP feature importance.</p>
 <pre><span></span><code><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    This function assigns to labels to each sample, 0 to first sample, 1 to the second. Then, It randomly selects a</span>
-<span class="sd">    portion of data to train on. The resulting model tries to distinguish which sample does a given test row comes</span>
-<span class="sd">    from. This provides insights on how distinguishable these samples are and which features contribute to that. The</span>
-<span class="sd">    feature importance is calculated using SHAP feature importance.</span>
+<span class="sd">     portion of data to train on. The resulting model tries to distinguish which sample does a given test row comes</span>
+<span class="sd">     from. This provides insights on how distinguishable these samples are and which features contribute to that. The</span>
+<span class="sd">     feature importance is calculated using SHAP feature importance.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 <span class="sd">    """</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X1</span><span class="o">=</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="o">=</span><span class="n">X2</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span>
 
@@ -1845,7 +1873,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X1</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>First sample to be compared. It needs to have the same number of columns</p>
+<p>First sample to be compared. It needs to have the same number of columns
+as X2.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1853,7 +1882,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>X2</code></td>
 <td><code>np.ndarray or pd.DataFrame</code></td>
 <td>
-<p>Second sample to be compared. It needs to have the same number of columns</p>
+<p>Second sample to be compared. It needs to have the same number of columns
+as X1.</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -1861,7 +1891,9 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>column_names</code></td>
 <td><code>list of str</code></td>
 <td>
-<p>List of feature names of the provided samples. If provided it will be</p>
+<p>List of feature names of the provided samples. If provided it will be
+used to overwrite the existing feature names. If not provided the existing feature names are used or default
+feature names are generated.</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1869,7 +1901,8 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 <td><code>return_auc</code></td>
 <td><code>bool</code></td>
 <td>
-<p>Flag indicating whether the method should return a tuple (feature</p>
+<p>Flag indicating whether the method should return a tuple (feature
+importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</p>
 </td>
 <td><code>False</code></td>
 </tr>
@@ -1917,17 +1950,17 @@ fit_compute<span class="p">(</span><span class="bp">self</span><span class="p">,
 
 <span class="sd">    Args:</span>
 <span class="sd">        X1 (np.ndarray or pd.DataFrame): First sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X2.</span>
+<span class="sd">         as X2.</span>
 
 <span class="sd">        X2 (np.ndarray or pd.DataFrame): Second sample to be compared. It needs to have the same number of columns</span>
-<span class="sd">        as X1.</span>
+<span class="sd">         as X1.</span>
 
 <span class="sd">        column_names (list of str, optional): List of feature names of the provided samples. If provided it will be</span>
-<span class="sd">        used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
-<span class="sd">        feature names are generated.</span>
+<span class="sd">         used to overwrite the existing feature names. If not provided the existing feature names are used or default</span>
+<span class="sd">         feature names are generated.</span>
 
 <span class="sd">        return_auc (bool, optional): Flag indicating whether the method should return a tuple (feature</span>
-<span class="sd">        importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
+<span class="sd">         importances, train AUC, test AUC), or only feature importances. By default the second option is selected.</span>
 
 <span class="sd">        **fit_kwargs: keyword arguments passed to the fit() method:</span>
 
@@ -2055,7 +2088,8 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <td><code>plot_type</code></td>
 <td><code>Optional, str</code></td>
 <td>
-<p>Type of plot, used to compute shap.summary_plot. By default 'bar', available ones</p>
+<p>Type of plot, used to compute shap.summary_plot. By default 'bar', available ones
+are  "dot", "bar", "violin",</p>
 </td>
 <td><code>'bar'</code></td>
 </tr>
@@ -2095,7 +2129,7 @@ plot<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        plot_type (Optional, str): Type of plot, used to compute shap.summary_plot. By default 'bar', available ones</span>
-<span class="sd">        are  "dot", "bar", "violin",</span>
+<span class="sd">         are  "dot", "bar", "violin",</span>
 
 <span class="sd">        **summary_plot_kwargs: kwargs passed to the shap.summary_plot.</span>
 
